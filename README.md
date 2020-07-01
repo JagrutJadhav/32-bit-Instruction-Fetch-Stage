@@ -2,4 +2,4 @@
 
 Project Under Development
 
-![](Fetch_stage/Fetch_stege.JPG)
+![](Fetch_stage/Fetch_stage.JPG)
