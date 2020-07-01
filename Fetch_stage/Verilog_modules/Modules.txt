@@ -1,1 +1,5 @@
-
+Program Counter
+Memory Address Register
+Memory Data Register
+Instruction Register
+Program Memory
