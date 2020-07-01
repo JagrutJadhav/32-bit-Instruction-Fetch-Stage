@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
+//Engineer: Jagrut Jadhav
 
 
-(* CORE_GENERATION_INFO = "Data_memory,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=Data_memory,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=6,numReposBlks=6,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=6,numPkgbdBlks=0,bdsource=USER,synth_mode=Global}" *) (* HW_HANDOFF = "Data_memory.hwdef" *) 
 module Fetch_stage
    (DataMemory_Address,
     DataMemory_inout,
@@ -23,8 +23,8 @@ module Fetch_stage
   input PC_rd_wr;
   input PM_rd_wr;
   input [4:0]ProgramCounter_addressin;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, CLK_DOMAIN Data_memory_clk, FREQ_HZ 12000000, INSERT_VIP 0, PHASE 0.000" *) input clk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.FETCH_OUTPUT DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.FETCH_OUTPUT, LAYERED_METADATA undef" *) output [66:0]fetch_output;
+  input clk;
+  output [66:0]fetch_output;
 
   wire [4:0]DataMemory_Address_1;
   wire Data_Memory_rd_wr_1;
