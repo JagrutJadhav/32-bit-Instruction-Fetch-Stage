@@ -1,4 +1,5 @@
 # 32-bit-Pipelined-Processor
 
 Project Under Development
-![](Fetch stage/Fetch_stege.JPG)
+
+![](Fetch_stage/Fetch_stege.JPG)
