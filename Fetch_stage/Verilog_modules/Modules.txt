@@ -4,14 +4,16 @@ Memory Data Register
 Instruction Register
 Program Memory
 
-00 => Add
-01 => Substract
-10 => Multiply
-11 => Divide
+000 => Add
+001 => Substract
+010 => Multiply
+011 => Divide
+100 => Load
+101 => Store
 
 Instruction Size:
 
-2+1+32+32= 67 bit
-2 => Operand
+3+1+32= 36 bit
+3 => Operand
 1 => Addressing Mode(only # in this case which indicates wheather to add/Substract etc. data from address or not)
-32=> Data,Address
+32=> Data/Address
