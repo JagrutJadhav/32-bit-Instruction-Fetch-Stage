@@ -10,11 +10,11 @@
 
 module MDR( input MDR_rd,MDR_wr, // wr => write to MDR , rd => read from MDR
 input clk,
-inout [66:0] inst
+inout [35:0] inst
  );
 
- wire [66:0] instload;
- reg [66 :0] instram,instout;
+ wire [35:0] instload;
+ reg [35 :0] instram,instout;
  
  always @ (posedge clk) begin
  if(MDR_wr)begin
@@ -25,5 +25,5 @@ inout [66:0] inst
  end
  
  end
- assign inst = MDR_rd? instout:67'dz;
+ assign inst = MDR_rd? instout:36'dz;
 endmodule
