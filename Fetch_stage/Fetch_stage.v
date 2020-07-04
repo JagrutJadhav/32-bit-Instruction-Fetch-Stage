@@ -8,7 +8,6 @@ Modules Instantiated
 - Memory Data Register
 - Program Memory
 - Instruction Register
-
 */
 /////////////////////////////////////
 module Fetch_stage_IP
@@ -25,8 +24,10 @@ module Fetch_stage_IP
     ProgramMemory_Inst_inout,
     ProgramMemory_rd,
     ProgramMemory_wr,
+    Input_instruction,
+    Input_instruction_address,
     clk);
-  output [66:0]FetchStage_Output;
+  output [35:0]FetchStage_Output;
   input IR_rd;
   input IR_wr;
   input MAR_rd;
@@ -36,13 +37,15 @@ module Fetch_stage_IP
   input [4:0]ProgramCounter_Address_in;
   input ProgramCounter_rd;
   input ProgramCounter_wr;
-  inout [66:0]ProgramMemory_Inst_inout;
+  inout [35:0]ProgramMemory_Inst_inout;
   input ProgramMemory_rd;
   input ProgramMemory_wr;
+  input [35:0] Input_instruction;
+  input [4:0] Input_instruction_address;
   input clk;
 
   wire IR_0_PCenable;
-  wire [66:0]IR_0_fetchout;
+  wire [35:0]IR_0_fetchout;
   wire IR_rd_1;
   wire IR_wr_1;
   wire [4:0]MAR_0_addout;
@@ -51,15 +54,16 @@ module Fetch_stage_IP
   wire MDR_rd_1;
   wire MDR_wr_1;
   wire Net;
-  wire [66:0]Net1;
+  wire [35:0]Net1;
   wire [4:0]ProgramCounter_Address_in_1;
   wire ProgramCounter_rd_1;
   wire ProgramCounter_wr_1;
   wire ProgramMemory_rd_1;
   wire ProgramMemory_wr_1;
   wire [4:0]program_counter_0_addressout;
-
-  assign FetchStage_Output[66:0] = IR_0_fetchout;
+  
+  assign MAR_0_addout = Input_instruction_address;
+  assign FetchStage_Output[35:0] = IR_0_fetchout;
   assign IR_rd_1 = IR_rd;
   assign IR_wr_1 = IR_wr;
   assign MAR_rd_1 = MAR_rd;
@@ -78,7 +82,7 @@ module Fetch_stage_IP
         .PCenable(IR_0_PCenable),
         .clk(Net),
         .fetchout(IR_0_fetchout),
-        .inst(ProgramMemory_Inst_inout[66:0]));
+        .inst(ProgramMemory_Inst_inout[35:0]));
   MAR MAR_0
        (.MAR_rd(MAR_rd_1),
         .MAR_wr(MAR_wr_1),
@@ -89,7 +93,7 @@ module Fetch_stage_IP
        (.MDR_rd(MDR_rd_1),
         .MDR_wr(MDR_wr_1),
         .clk(Net),
-        .inst(ProgramMemory_Inst_inout[66:0]));
+        .inst(ProgramMemory_Inst_inout[35:0]));
   program_counter program_counter_0
        (.CE(IR_0_PCenable),
         .PC_rd(ProgramCounter_rd_1),
@@ -102,5 +106,6 @@ module Fetch_stage_IP
         .PM_wr(ProgramMemory_wr_1),
         .address(MAR_0_addout),
         .clk(Net),
-        .inst(ProgramMemory_Inst_inout[66:0]));
+        .input_inst(Input_instruction),
+        .inst(ProgramMemory_Inst_inout[35:0]));
 endmodule
