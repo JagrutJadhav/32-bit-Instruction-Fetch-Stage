@@ -13,7 +13,7 @@ Program Memory
 
 Instruction Size:
 
-3+1+32= 36 bit
+3+1+32+32= 68 bit
 3 => Operand
 1 => Addressing Mode(only # in this case which indicates wheather to add/Substract etc. data from address or not)
-32=> Data/Address
+32=> Data or Address
