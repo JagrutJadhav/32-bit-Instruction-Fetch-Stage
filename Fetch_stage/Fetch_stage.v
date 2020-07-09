@@ -1,4 +1,5 @@
 `timescale 1 ps / 1 ps
+
 //////////////////////////////////////
 // Engineer : Jagrut Jadhav
 /*
@@ -10,102 +11,90 @@ Modules Instantiated
 - Instruction Register
 */
 /////////////////////////////////////
-module Fetch_stage_IP
-   (FetchStage_Output,
-    IR_rd,
-    IR_wr,
-    MAR_rd,
-    MAR_wr,
-    MDR_rd,
-    MDR_wr,
-    ProgramCounter_Address_in,
-    ProgramCounter_rd,
-    ProgramCounter_wr,
-    ProgramMemory_Inst_inout,
-    ProgramMemory_rd,
-    ProgramMemory_wr,
-    Input_instruction,
-    Input_instruction_address,
-    clk);
-  output [35:0]FetchStage_Output;
-  input IR_rd;
-  input IR_wr;
-  input MAR_rd;
-  input MAR_wr;
-  input MDR_rd;
-  input MDR_wr;
-  input [4:0]ProgramCounter_Address_in;
-  input ProgramCounter_rd;
-  input ProgramCounter_wr;
-  inout [35:0]ProgramMemory_Inst_inout;
-  input ProgramMemory_rd;
-  input ProgramMemory_wr;
-  input [35:0] Input_instruction;
-  input [4:0] Input_instruction_address;
+module FetchStage_AUTO
+   (ControlSig_1,
+    ControlSig_2,
+    Fetch_out,
+    PC_addressin,
+    PC_write,
+    PM_inst_inp,
+    PM_wr,
+    clk,
+    reset);
+  input ControlSig_1;
+  input ControlSig_2;
+  output [67:0]Fetch_out;
+  input [4:0]PC_addressin;
+  input PC_write;
+  input [67:0]PM_inst_inp;
+  input PM_wr;
   input clk;
+  input reset;
 
+  wire ControlSig_1_1;
+  wire ControlSig_2_1;
   wire IR_0_PCenable;
-  wire [35:0]IR_0_fetchout;
-  wire IR_rd_1;
-  wire IR_wr_1;
+  wire [67:0]IR_0_fetchout;
   wire [4:0]MAR_0_addout;
-  wire MAR_rd_1;
-  wire MAR_wr_1;
-  wire MDR_rd_1;
-  wire MDR_wr_1;
-  wire Net;
-  wire [35:0]Net1;
-  wire [4:0]ProgramCounter_Address_in_1;
-  wire ProgramCounter_rd_1;
-  wire ProgramCounter_wr_1;
-  wire ProgramMemory_rd_1;
-  wire ProgramMemory_wr_1;
-  wire [4:0]program_counter_0_addressout;
-  
-  assign MAR_0_addout = Input_instruction_address;
-  assign FetchStage_Output[35:0] = IR_0_fetchout;
-  assign IR_rd_1 = IR_rd;
-  assign IR_wr_1 = IR_wr;
-  assign MAR_rd_1 = MAR_rd;
-  assign MAR_wr_1 = MAR_wr;
-  assign MDR_rd_1 = MDR_rd;
-  assign MDR_wr_1 = MDR_wr;
-  assign Net = clk;
-  assign ProgramCounter_Address_in_1 = ProgramCounter_Address_in[4:0];
-  assign ProgramCounter_rd_1 = ProgramCounter_rd;
-  assign ProgramCounter_wr_1 = ProgramCounter_wr;
-  assign ProgramMemory_rd_1 = ProgramMemory_rd;
-  assign ProgramMemory_wr_1 = ProgramMemory_wr;
+  wire MAR_0_new_feed;
+  wire MDR_2_0_new_feed;
+  wire [67:0]MDR_2_0_upgraded_ipi_inst;
+  wire Net1;
+  wire [4:0]PC_addressin_1;
+  wire PC_write_1;
+  wire [67:0]PM_inst_inp_1;
+  wire PM_wr_1;
+  wire [4:0]Program_counter_2_0_addressout;
+  wire [67:0]program_memory_0_inst;
+  wire reset_1;
+
+  assign ControlSig_1_1 = ControlSig_1;
+  assign ControlSig_2_1 = ControlSig_2;
+  assign Fetch_out[67:0] = IR_0_fetchout;
+  assign Net1 = clk;
+  assign PC_addressin_1 = PC_addressin[4:0];
+  assign PC_write_1 = PC_write;
+  assign PM_inst_inp_1 = PM_inst_inp[67:0];
+  assign PM_wr_1 = PM_wr;
+  assign reset_1 = reset;
+  Control_Unit_Fetch Control_Unit_Fetch_0
+       (.clk(Net1),
+        .control_1(ControlSig_1_1),
+        .control_2(ControlSig_2_1),
+        .sig1(IR_0_PCenable),
+        .sig2(MAR_0_new_feed),
+        .sig3(MDR_2_0_new_feed));
   IR IR_0
-       (.IR_rd(IR_rd_1),
-        .IR_wr(IR_wr_1),
-        .PCenable(IR_0_PCenable),
-        .clk(Net),
+       (.IR_rd(MAR_0_new_feed),
+        .IR_wr(MDR_2_0_new_feed),
+        .clk(Net1),
         .fetchout(IR_0_fetchout),
-        .inst(ProgramMemory_Inst_inout[35:0]));
+        .inst(MDR_2_0_upgraded_ipi_inst));
   MAR MAR_0
-       (.MAR_rd(MAR_rd_1),
-        .MAR_wr(MAR_wr_1),
-        .addin(program_counter_0_addressout),
+       (.MAR_rd(MAR_0_new_feed),
+        .MAR_wr(IR_0_PCenable),
+        .addin(Program_counter_2_0_addressout),
         .addout(MAR_0_addout),
-        .clk(Net));
-  MDR MDR_0
-       (.MDR_rd(MDR_rd_1),
-        .MDR_wr(MDR_wr_1),
-        .clk(Net),
-        .inst(ProgramMemory_Inst_inout[35:0]));
-  program_counter program_counter_0
-       (.CE(IR_0_PCenable),
-        .PC_rd(ProgramCounter_rd_1),
-        .PC_wr(ProgramCounter_wr_1),
-        .addressin(ProgramCounter_Address_in_1),
-        .addressout(program_counter_0_addressout),
-        .clk(Net));
+        .clk(Net1));
+  MDR_2 MDR_2_0
+       (.MDR_rd(MDR_2_0_new_feed),
+        .MDR_wr(MAR_0_new_feed),
+        .clk(Net1),
+        .inst(MDR_2_0_upgraded_ipi_inst),
+        .instin(program_memory_0_inst));
+  Program_counter_2 Program_counter_2_0
+       (.CE(MAR_0_new_feed),
+        .PC_rd(IR_0_PCenable),
+        .PC_wr(PC_write_1),
+        .addressin(PC_addressin_1),
+        .addressout(Program_counter_2_0_addressout),
+        .clk(Net1),
+        .reset(reset_1));
   program_memory program_memory_0
-       (.PM_rd(ProgramMemory_rd_1),
-        .PM_wr(ProgramMemory_wr_1),
+       (.PM_rd(MAR_0_new_feed),
+        .PM_wr(PM_wr_1),
         .address(MAR_0_addout),
-        .clk(Net),
-        .input_inst(Input_instruction),
-        .inst(ProgramMemory_Inst_inout[35:0]));
+        .clk(Net1),
+        .input_inst(PM_inst_inp_1),
+        .inst(program_memory_0_inst));
 endmodule
