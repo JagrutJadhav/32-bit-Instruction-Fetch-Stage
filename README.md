@@ -4,7 +4,9 @@ Project Under Development
 
 # Fetch Stage #
 The Fetch stage designed by me takes 3 cycles to fetch the inctruction from the program memory and output the instruction from Instruction Register to Decode Stage.
-Fetch Stage Block Design:-
+
+*_ Fetch Stage Block Design:- _*
+
 ![](Fetch_stage/Fetch_stage.JPG)
 
 The process of the fetch stage is as follows-
@@ -15,5 +17,6 @@ The process of the fetch stage is as follows-
 5. Memory Data Register => Instruction Register
 6. Instruction Register => Decode stage
 
-Fetch Stage Simulation using System Verilog:-
+*_ Fetch Stage Simulation using System Verilog:- _*
+
 ![](Fetch_stage/Testbench/Fetch_Stage_simulation.JPG)
