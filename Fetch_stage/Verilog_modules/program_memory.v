@@ -19,21 +19,20 @@ Simple Instructions
 module program_memory(input [4:0] address,
 input PM_rd,PM_wr,// low signal => write into program memory , High => read from program memory
 input clk, 
-input [35:0] input_inst,
-inout [35:0] inst
+input [67:0] input_inst,
+output reg [67:0] inst
  
 );
 
-reg [35:0] ram [31:0];
-reg [35:0] outinst;
+reg [67:0] ram [31:0];
+reg [67:0] outinst;
 always @ (posedge clk) begin
 if(!PM_wr && PM_rd)
-outinst <= ram[address];
+inst <= ram[address];
 else if (PM_wr && !PM_rd)begin
     ram[address] <= input_inst;
-    ram[address] <= inst;
+    //ram[address] <= inst;
 end
-else outinst<=outinst;
+else inst <= 68'dz;
 end
-assign inst = (!PM_wr && PM_rd)? outinst:36'dz;
 endmodule
