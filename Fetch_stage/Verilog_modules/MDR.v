@@ -8,22 +8,26 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MDR( input MDR_rd,MDR_wr, // wr => write to MDR , rd => read from MDR
+module MDR_2( input MDR_rd,MDR_wr, // wr => write to MDR , rd => read from MDR
 input clk,
-inout [35:0] inst
+input [67:0] instin,
+output reg [67:0] inst
  );
 
- wire [35:0] instload;
- reg [35 :0] instram,instout;
- 
+
+ reg [67:0] instram;
+ reg [67:0]instout;
+
  always @ (posedge clk) begin
  if(MDR_wr)begin
-    instram <= inst;
+    instram <= instin;
+ end
+ else if (MDR_rd )begin
+    inst <= instram;
  end
  else begin
-    instram <= instram;
+   instram <= instram;
  end
  
  end
- assign inst = MDR_rd? instout:36'dz;
 endmodule
