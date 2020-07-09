@@ -10,31 +10,23 @@
 
 module IR( input IR_rd,IR_wr, // wr => write to IR , rd => read from IR
 input clk,
-inout [35:0] inst,
-output [35:0] fetchout,
-output PCenable
+input [67:0] inst,
+output reg [67:0] fetchout
  );
- reg [35:0] preinst;
- wire [35:0] instload;
- reg [35 :0] instram;
- reg PCena = 1'b0;
+ 
+ reg [67 :0] instram;
+
  always @ (posedge clk) begin
   
-    instram <= instload;
-if (IR_wr)begin
+if (IR_wr && !IR_rd)begin
    instram <= inst;
 end
-else begin
-  instram <= instram;
+else if (!IR_wr && IR_rd)begin
+   fetchout <= instram;
 end
- if (preinst != instram)begin
-  PCena <= 1'b1;
-  preinst <= instload;
+else begin
+  fetchout <= 68'dz;
+end
+ 
  end
- else begin
-  PCena <= 1'b0;
- end
- end
- assign fetchout = IR_rd? instram:36'dz;
- assign inst = IR_rd? instram:36'dz;
 endmodule
