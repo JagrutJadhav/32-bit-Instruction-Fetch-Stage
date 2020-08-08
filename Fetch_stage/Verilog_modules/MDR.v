@@ -8,15 +8,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MDR_2( input MDR_rd,MDR_wr, // wr => write to MDR , rd => read from MDR
-input clk,
-input [67:0] instin,
-output reg [67:0] inst
+module MDR_2(input MDR_rd,MDR_wr, // wr => write to MDR , rd => read from MDR
+             input clk,
+             input [31:0] instin,
+             output reg [31:0] inst
  );
 
 
- reg [67:0] instram;
- reg [67:0]instout;
+ reg [31:0] instram;
+ reg [31:0]instout;
 
  always @ (posedge clk) begin
  if(MDR_wr)begin
