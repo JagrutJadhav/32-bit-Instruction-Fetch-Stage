@@ -31,20 +31,20 @@ STA 0x05        // 101 1 0x00000000 0x00000005
 module Fetch_TestBench();
 
 
-logic [67:0] Fetch_out;
+logic [31:0] Fetch_out;
 logic [4:0] PC_addressin;
 logic PC_write;
-logic [67:0] PM_inst_inp;
+logic [31:0] PM_inst_inp;
 logic PM_wr;
 logic clk;
 logic reset;
-logic [67:0] PM [5:0];
+logic [31:0] PM [5:0];
 logic start;
 logic ControlSig_1;
 logic ControlSig_2;
 //////////
 logic [1:0] count;
-logic [67:0] inst;
+logic [31:0] inst;
 logic [1:0] control;
 FetchStage_AUTO
    DUT_2 (.Fetch_out(Fetch_out),
@@ -68,13 +68,13 @@ initial begin
 reset <= 1'b0;
 PC_write <= 1'b0;
 count <= 2'd0;
-PM_inst_inp <= 68'dz;
+PM_inst_inp <= 32'dz;
 ControlSig_2 <= 1'b0;
 ControlSig_1 <= 1'b0;
 PM_wr <= 1'b0;
 clk <= 1'b0;
 //PC_wr(1'b1);
-for (int i=0 ; i<= 5'h03; i=i+1)
+   for (int i=0 ; i<= 4'h03; i=i+1)
 $display("instruction at address %h = %h",i,PM[i]);
 end
 
@@ -106,11 +106,11 @@ endmodule
 module PM_dummy(input [4:0] PM_add,
 input PM_read,// low signal => write into program memory , High => read from program memory
 input clk, 
-output reg [67:0] inst);
+output reg [31:0] inst);
 
-logic [67:0] PM [5:0];
+logic [31:0] PM [5:0];
 initial $readmemh("Instructions.mem",PM);
-reg [67:0] instruction;
+reg [31:0] instruction;
 always @ (posedge clk) begin
 //$display("Entered Program memory");
 if (PM_read) begin
