@@ -21,40 +21,40 @@ module FetchStage_AUTO
     PM_wr,
     clk,
     reset);
-  input ControlSig_1;
-  input ControlSig_2;
-  output [67:0]Fetch_out;
-  input [4:0]PC_addressin;
-  input PC_write;
-  input [67:0]PM_inst_inp;
-  input PM_wr;
-  input clk;
-  input reset;
+   input ControlSig_1;
+   input ControlSig_2;
+   output [31:0]Fetch_out;
+   input [4:0]PC_addressin;
+   input PC_write;
+   input [31:0]PM_inst_inp;
+   input PM_wr;
+   input clk;
+   input reset;
 
-  wire ControlSig_1_1;
-  wire ControlSig_2_1;
-  wire IR_0_PCenable;
-  wire [67:0]IR_0_fetchout;
-  wire [4:0]MAR_0_addout;
-  wire MAR_0_new_feed;
-  wire MDR_2_0_new_feed;
-  wire [67:0]MDR_2_0_upgraded_ipi_inst;
-  wire Net1;
-  wire [4:0]PC_addressin_1;
-  wire PC_write_1;
-  wire [67:0]PM_inst_inp_1;
-  wire PM_wr_1;
-  wire [4:0]Program_counter_2_0_addressout;
-  wire [67:0]program_memory_0_inst;
-  wire reset_1;
+   wire ControlSig_1_1;
+   wire ControlSig_2_1;
+   wire IR_0_PCenable;
+   wire [31:0]IR_0_fetchout;
+   wire [4:0]MAR_0_addout;
+   wire MAR_0_new_feed;
+   wire MDR_2_0_new_feed;
+   wire [31:0]MDR_2_0_upgraded_ipi_inst;
+   wire Net1;
+   wire [4:0]PC_addressin_1;
+   wire PC_write_1;
+   wire [31:0]PM_inst_inp_1;
+   wire PM_wr_1;
+   wire [4:0]Program_counter_2_0_addressout;
+   wire [31:0]program_memory_0_inst;
+   wire reset_1;
 
   assign ControlSig_1_1 = ControlSig_1;
   assign ControlSig_2_1 = ControlSig_2;
-  assign Fetch_out[67:0] = IR_0_fetchout;
+  assign Fetch_out[31:0] = IR_0_fetchout;
   assign Net1 = clk;
   assign PC_addressin_1 = PC_addressin[4:0];
   assign PC_write_1 = PC_write;
-  assign PM_inst_inp_1 = PM_inst_inp[67:0];
+  assign PM_inst_inp_1 = PM_inst_inp[31:0];
   assign PM_wr_1 = PM_wr;
   assign reset_1 = reset;
   Control_Unit_Fetch Control_Unit_Fetch_0
