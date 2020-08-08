@@ -17,15 +17,15 @@ Simple Instructions
 
 
 module program_memory(input [4:0] address,
-input PM_rd,PM_wr,// low signal => write into program memory , High => read from program memory
-input clk, 
-input [67:0] input_inst,
-output reg [67:0] inst
+                      input PM_rd,PM_wr,// low signal => write into program memory , High => read from program memory
+                      input clk, 
+                      input [31:0] input_inst,
+                      output reg [31:0] inst
  
 );
 
-reg [67:0] ram [31:0];
-reg [67:0] outinst;
+ reg [31:0] ram [31:0];
+ reg [31:0] outinst;
 always @ (posedge clk) begin
 if(!PM_wr && PM_rd)
 inst <= ram[address];
@@ -33,6 +33,6 @@ else if (PM_wr && !PM_rd)begin
     ram[address] <= input_inst;
     //ram[address] <= inst;
 end
-else inst <= 68'dz;
+else inst <= 32'dz;
 end
 endmodule
