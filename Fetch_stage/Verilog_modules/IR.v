@@ -8,13 +8,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IR( input IR_rd,IR_wr, // wr => write to IR , rd => read from IR
-input clk,
-input [67:0] inst,
-output reg [67:0] fetchout
+module IR(input IR_rd,IR_wr, // wr => write to IR , rd => read from IR
+          input clk,
+          input [31:0] inst,
+          output reg [31:0] fetchout
  );
  
- reg [67 :0] instram;
+ reg [31 :0] instram;
 
  always @ (posedge clk) begin
   
@@ -25,7 +25,7 @@ else if (!IR_wr && IR_rd)begin
    fetchout <= instram;
 end
 else begin
-  fetchout <= 68'dz;
+  fetchout <= 32'dz;
 end
  
  end
