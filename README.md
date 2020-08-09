@@ -33,11 +33,15 @@ ADDI - add immidiate
 
 *_ Instructions I made and used _*
 
-*_ LW $1, 0x00(0x00)    =>  0x8C010000  (100011_00000_00001_0000000000000000)
+* LW $1, 0x00(0x00)    =>  0x8C010000  (100011_00000_00001_0000000000000000)
+
 LW $2, 0x01(0x00)    =>  0x8C020001  (100011_00000_00010_0000000000000001)
+
 ADD $3,$1,$2         =>  0x00411820  (000000_00010_00001_00011_00000_100000)
+
 SW $3, 0x02(0x00)    =>  0x8C030002  (100011_00000_00011_0000000000000010)
-ADDI $4,$2,100       =>  0x20440006  (001000_00010_00100_0000000000000110) _*
+
+ADDI $4,$2,100       =>  0x20440006  (001000_00010_00100_0000000000000110) *
 
 # Fetch Stage #
 The Fetch stage designed by me takes 3 cycles to fetch the inctruction from the program memory and output the instruction from Instruction Register to Decode Stage.
