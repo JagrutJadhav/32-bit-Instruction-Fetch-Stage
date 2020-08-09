@@ -2,26 +2,6 @@
 
 Project Under Development
 
-MIPS instruction R - type
-
-------Function---
-ADD    (0x20)
-SUB    (0x1A)
-MUL    (0x18)
-DIV    (0x22)
-
-MIPS instruction I -type 
-
-LW - load word
-LA - load address
-LI - load Immidiate
-SW - store word
-ADDI - add immidiate  
-
-0x01 > register 1
-0x02 > register 2
-0x03 > register 3
-0x04 > register 4
 
 *_ Instructions I made and used _*
 
