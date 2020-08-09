@@ -4,10 +4,6 @@ Project Under Development
 
 MIPS instruction R - type
 
-|    OPCODE     |  RS      |    RT    |       RD      |    SHIFT      |      FUNCTION    |
-| _____________ |_ SOURCE1_|  SOURCE2 | _Destination_ |  ____________ |  ______________  |
-|     6-bit     |   5 bit  |   5 bit  |      5bit     |     5 bit     |        6 bit     |
-|  ____________ |   ______ |__________|______________ |______________ |__________________|
 ------Function---
 ADD    (0x20)
 SUB    (0x1A)
@@ -15,11 +11,7 @@ MUL    (0x18)
 DIV    (0x22)
 
 MIPS instruction I -type 
-________________ _______________________________________________________________________
-|    OPCODE     |  RS     |    RT        |        Offset address                        |
-|______________ |_SOURCE1_|_Destination_ |_____________________________________________ |
-|     6-bit     |   5 bit |   5 bit      |          16 bit                              |
-|______________ |________ |______________|______________________________________________|
+
 LW - load word
 LA - load address
 LI - load Immidiate
