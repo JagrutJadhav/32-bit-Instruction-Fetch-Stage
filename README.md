@@ -1,4 +1,4 @@
-# 32-bit-Pipelined-Processor
+# 32-bit-Instruction-Fetch-Stage
 
 Project Under Development
 
